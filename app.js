@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-
+const http=require('http');
 const multer = require('multer');
 const fs = require('fs');
 const { PDFDocument } = require('pdf-lib');
@@ -326,7 +326,6 @@ const prepare_view_excel = async () => {
         throw error;
     }
 };
-
 // Usage
 
 
@@ -345,11 +344,7 @@ app.post('/insertData', async (req, res) => {
         res.json({ message: 'primary key conflict' });
     }
 });
-
-
 //API endpoint for file upload
-
-
 app.post('/upload', upload.single('xlsxFile'), async (req, res) => {
     const uploadedFile = req.file;
     console.log('Request received at /upload');
@@ -404,7 +399,9 @@ app.post('/upload', upload.single('xlsxFile'), async (req, res) => {
             try {
                 const response = await prepare_view_excel();
                 console.log('Server response:', response);
+                if(response){
                 res.json({ message: 'after excel client'})
+                }
                 // Send a response with download links
                 
             } catch (excelError) {
@@ -434,10 +431,9 @@ app.post('/upload', upload.single('xlsxFile'), async (req, res) => {
 
 });
 
+const port = process.env.PORT||3000;
+const server= http.createServer(app);
 
-
-
-const port = 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

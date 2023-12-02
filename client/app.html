@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Send XLSX File to Server</title>
     <style>
-        /* Initially hide the submit button */
-      
+      /* Initially hide the submit button */
     </style>
-</head>
+  </head>
 
-<body>
-    <input type="file" id="fileInput" accept=".xls">
+  <body>
+    <input type="file" id="fileInput" accept=".xls" />
     <button id="sendDataButton">Send XLSX File to Server</button>
 
     <!-- Display download links -->
-    <div id="downloadLinks" >
-        <p>Download Links:</p>
-        <p id="pdfLink">PDF: <a href="output.pdf" target="_blank">Download PDF</a></p>
-        <p id="excelLink">Excel: <a href="output.xlsx" target="_blank">Download Excel</a></p>
+    <div id="downloadLinks">
+      <p>Download Links:</p>
+      <p id="pdfLink">
+        PDF: <a href="output.pdf" target="_blank">Download PDF</a>
+      </p>
+      <p id="excelLink">
+        Excel: <a href="output.xlsx" target="_blank">Download Excel</a>
+      </p>
     </div>
 
-    <button id="addButton" >Add</button>
+    <button id="addButton">Add</button>
     <button id="editButton">Edit</button>
 
     <!-- Container for input boxes and submit button -->
-    <div id="inputContainer" style="display:none">
-        <label for="input1">Remote Station ID:</label>
-        <input type="text" id="input1" />
-    
-        <label for="input2">Dam ID:</label>
-        <input type="text" id="input2" />
-    
-        <button id="submitButton" onclick="handleFormSubmit()">Submit</button>
+    <div id="inputContainer" style="display: none">
+      <label for="input1">Remote Station ID:</label>
+      <input type="text" id="input1" />
+
+      <label for="input2">Dam ID:</label>
+      <input type="text" id="input2" />
+
+      <button id="submitButton" onclick="handleFormSubmit()">Submit</button>
     </div>
 
     <script src="handle.js"></script>
     <script src="handle_add.js"></script>
     <script>
-        // Attach an event listener to the button to send data when clicked
-        document.getElementById('sendDataButton').addEventListener('click', () => {
-            const fileInput = document.getElementById('fileInput');
-            const selectedFile = fileInput.files[0];
-            sendXLSXFileToServer(selectedFile);
+      // Attach an event listener to the button to send data when clicked
+      document
+        .getElementById("sendDataButton")
+        .addEventListener("click", () => {
+          const fileInput = document.getElementById("fileInput");
+          const selectedFile = fileInput.files[0];
+          sendXLSXFileToServer(selectedFile);
         });
 
-        // Attach event listeners to the add and edit buttons
-       
-        // Function to show the submit button
-        document.getElementById('addButton').addEventListener('click', () => {
-            const inputContainer = document.getElementById('inputContainer');
-            inputContainer.style.display = inputContainer.style.display === 'none' ? 'block' : 'none';
-           
-        });
+      // Attach event listeners to the add and edit buttons
 
-        // Function to handle form submission
-        function handleFormSubmit() {
-            //console.log("tytyt");
-            const input1Value = document.getElementById('input1').value;
-            console.log(input1Value);
-            const input2Value = document.getElementById('input2').value;
-            console.log(input2Value);
+      // Function to show the submit button
+      document.getElementById("addButton").addEventListener("click", () => {
+        const inputContainer = document.getElementById("inputContainer");
+        inputContainer.style.display =
+          inputContainer.style.display === "none" ? "block" : "none";
+      });
 
-                add_data(input1Value, input2Value);
-            
-            // Perform any actions with the submitted values (e.g., send to server)
-            console.log('Submitted values:', input1Value, input2Value);
-        }
+      // Function to handle form submission
+      function handleFormSubmit() {
+        //console.log("tytyt");
+        const input1Value = document.getElementById("input1").value;
+        console.log(input1Value);
+        const input2Value = document.getElementById("input2").value;
+        console.log(input2Value);
+
+        add_data(input1Value, input2Value);
+
+        // Perform any actions with the submitted values (e.g., send to server)
+        console.log("Submitted values:", input1Value, input2Value);
+      }
     </script>
-</body>
-
+  </body>
 </html>
